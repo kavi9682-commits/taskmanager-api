@@ -139,3 +139,20 @@ SIMPLE_JWT = {
 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+import os
+import dj_database_url
+
+# Replace default SQLite with PostgreSQL when deployed
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600
+    )
+}
+
+ALLOWED_HOSTS = ['*']
+
+# Static files for Render
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
